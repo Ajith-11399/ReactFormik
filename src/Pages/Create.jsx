@@ -28,19 +28,17 @@ const Create = () => {
   });
   
 
-  const handleSubmit = async (values) => {
-    await axios
-      .post("https://6661ded563e6a0189febeaba.mockapi.io/api/books")
-      .then((res) => console.log(res.date))
-      .catch((error) => console.log(error));
-
-      navigate("/books");
-  };
-
   const formik = useFormik({
     initialValues: { createData },
     validationSchema,
-    onSubmit: handleSubmit,
+    onSubmit: async(values) => {
+      await axios
+        .post("https://6661ded563e6a0189febeaba.mockapi.io/api/books", values)
+        .then((res) => console.log(res.date))
+        .catch((error) => console.log(error));
+  
+        navigate("/Books");
+    }
   });
 
   return (
