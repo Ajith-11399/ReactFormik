@@ -16,7 +16,7 @@ const Home = () => {
 
   return (
     <div>
-      <div className="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-3 m-2 mt-5 mb-5 justify-content-between">
+      <div className="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-3 m-2 mt-5 mb-5 justify-content-center">
         {bookData.map((element, index) => {
           return (
             <div key={index}>
@@ -30,9 +30,13 @@ const Home = () => {
                     />
                   </div>
                   <div className="card-body mb-3">
-                    <p className="card-title" style={{ "font-size": "25px" }}>
+                    <p className="card-title" style={{ "fontSize": "25px" }}>
                       <span className="ft-bold">Book Title:</span> &nbsp;
                       {element.name}
+                    </p>
+                    <p className="card-text">
+                      <span className="ft-bold">Book ID:</span> &nbsp;
+                      {element.id}
                     </p>
                     <p className="card-text">
                       <span className="ft-bold">Author's Name:</span> &nbsp;

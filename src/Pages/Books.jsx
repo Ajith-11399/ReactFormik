@@ -1,22 +1,44 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Books = () => {
+
+const Books = ({setId}) => {
+
+  const navigate = useNavigate();
+
   const [bookData, setBookData] = useState([]);
+
   useEffect(() => {
     fetchData();
   }, []);
+
   const fetchData = async () => {
     await axios
       .get("https://6661ded563e6a0189febeaba.mockapi.io/api/books")
       .then((res) => setBookData(res.data))
       .catch((error) => console.log(error));
   };
+
+  const handleEdit = (id) => {
+    setId(id);
+    navigate(`/edit/${id}`);
+  };
+
+  const handleDel = async(id) => {
+    await axios.delete(`https://6661ded563e6a0189febeaba.mockapi.io/api/books/${id}`)
+    .then((res)=> setDelData(res.data))
+    .catch((error) => console.log("Error"));
+  }
+
+  
   return (
     <div className="container-fluid mt-3">
       <div className="text-center pt-5 pb-5">
         <h2>LIBRARY MANAGEMENT DASHBOARD</h2>
-        <p>Here you can see all the available informations of selected books. </p>
+        <p>
+          Here you can see all the available informations of selected books.{" "}
+        </p>
         <p className="text">Scroll horizontally to see the table!</p>
       </div>
       <div className="table-responsive">
@@ -79,12 +101,12 @@ const Books = () => {
       </div>
       <div className="m-5">
         <button
-          className="btn btn-primary  text-center"
+          className="btn btn-primary text-center"
           onClick={() => {
             navigate("/create");
           }}
         >
-          <h4>Create User Data</h4>
+          <h4 className="m-0">Create User Data</h4>
         </button>
       </div>
     </div>
