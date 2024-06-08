@@ -1,14 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import HeroSection from "../Components/HeroSection";
+import Navbar from "../Components/Navbar";
+import Footer from "../Components/Footer";
 
-
-const Books = ({setId}) => {
-
-  const navigate = useNavigate();
-
+const Books = () => {
   const [bookData, setBookData] = useState([]);
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -20,95 +17,70 @@ const Books = ({setId}) => {
       .catch((error) => console.log(error));
   };
 
-  const handleEdit = (id) => {
-    setId(id);
-    navigate(`/edit/${id}`);
-  };
-
-  const handleDel = async(id) => {
-    await axios.delete(`https://6661ded563e6a0189febeaba.mockapi.io/api/books/${id}`)
-    .then((res)=> setDelData(res.data))
-    .catch((error) => console.log("Error"));
-  }
-
-  
   return (
-    <div className="container-fluid mt-3">
-      <div className="text-center pt-5 pb-5">
-        <h2>LIBRARY MANAGEMENT DASHBOARD</h2>
-        <p>
-          Here you can see all the available informations of selected books.{" "}
-        </p>
-        <p className="text">Scroll horizontally to see the table!</p>
+ 
+    <div>
+    <Navbar />
+      <HeroSection />
+      <div className="container">
+        <div className="row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-1 m-0 mt-5 mb-5 p-0 justify-content-center">
+          {bookData.map((element, index) => {
+            return (
+              <div key={index}>
+                <div className="col p-0">
+                  <div className="card" style={{ height: "100%" }}>
+                    <div className="rounded-4">
+                      <img
+                        src="https://i.pinimg.com/736x/98/4d/13/984d13e41facc036fdd11d7e410319f6.jpg"
+                        className="card-img-top p-3"
+                        alt="..."
+                      />
+                    </div>
+                    <div className="card-body mb-3">
+                      <p className="card-title" style={{ fontSize: "25px" }}>
+                        <span className="ft-bold">Book Title:</span> &nbsp;
+                        {element.name}
+                      </p>
+                      <p className="card-text">
+                        <span className="ft-bold">Book ID:</span> &nbsp;
+                        {element.id}
+                      </p>
+                      <p className="card-text">
+                        <span className="ft-bold">Author's Name:</span> &nbsp;
+                        <br />
+                        {element.authorname}
+                      </p>
+                      <p className="card-text">
+                        <span className="ft-bold">Author's DOB:</span> &nbsp;
+                        <br />
+                        {element.dob}
+                      </p>
+                      <p className="card-text">
+                        <span className="ft-bold">Author's Biographhy:</span>{" "}
+                        &nbsp;
+                        <br />
+                        {element.biography}
+                      </p>
+                      <p className="card-text">
+                        <span className="ft-bold">Date of Book Published:</span>{" "}
+                        &nbsp;
+                        <br />
+                        {element.published_date}
+                      </p>
+                      <p className="card-text">
+                        <span className="ft-bold">ISBN Number:</span> &nbsp;
+                        <br />
+                        {element.isbn}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
-      <div className="table-responsive">
-        <table
-          className="table table-bordered border-dark box2"
-          // style={{ overflow: "scroll" }}
-          style={{ overflow: "scroll", width: "100%", height: "800px" }}
-        >
-          <thead>
-            <tr className="text-center">
-              <th scope="col">ID</th>
-              <th scope="col">Book's Title</th>
-              <th scope="col">Author</th>
-              <th scope="col">Published Date</th>
-              <th scope="col">ISBN Number</th>
-              <th scope="col">Author's DOB</th>
-              <th scope="col">Biography</th>
-              <th scope="col" colSpan={2}>
-                Actions
-              </th>
-            </tr>
-          </thead>
-
-          <tbody className="table-group-divider">
-            {bookData.map((element, index) => {
-              return (
-                <tr key={index}>
-                  <th scope="row">{element.id}</th>
-                  <td>{element.name}</td>
-                  <td>{element.authorname}</td>
-                  <td>{element.published_date}</td>
-                  <td>{element.isbn}</td>
-                  <td>{element.dob}</td>
-                  <td>{element.biography}</td>
-                  <td>
-                    <button
-                      className="btn btn-primary"
-                      onClick={() => {
-                        handleEdit(element.id);
-                      }}
-                    >
-                      Edit
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => {
-                        handleDel(element.id);
-                      }}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-      <div className="m-5">
-        <button
-          className="btn btn-primary text-center"
-          onClick={() => {
-            navigate("/create");
-          }}
-        >
-          <h4 className="m-0">Create User Data</h4>
-        </button>
-      </div>
+      <Footer />
     </div>
   );
 };
