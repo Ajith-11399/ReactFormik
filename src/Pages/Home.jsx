@@ -39,7 +39,7 @@ const Home = ({ setId }) => {
     <div>
       <div className="sb-nav-fixed">
         <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-          <Link to="/#" className="navbar-brand ps-3">
+          <Link to="/#" className="navbar-brand ps-3 text-primary">
             RISE
           </Link>
 
