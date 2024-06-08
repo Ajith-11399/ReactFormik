@@ -29,7 +29,7 @@ const Navbar = () => {
               </li>
               <li className="nav-item">
                 <Link to="/books" className="nav-link text-light">
-                  Books
+                  Library
                 </Link>
               </li>
               <li className="nav-item">
