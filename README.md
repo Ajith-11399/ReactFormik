@@ -8,7 +8,7 @@ simply browsing through your library, this app provides a user-friendly interfac
 
 - **CRUD Operations:** Perform Create, Read, Update, and Delete operations on book records.
 - **Admin Dashboard:** Access an intuitive admin dashboard for managing the library efficiently.
-- **[Library](https://library-management-aj.netlify.app/commit):** Enjoy a clean and responsive user interface for seamless navigation and interaction.
+- **<a href="https://library-management-aj.netlify.app/commit">Library</a>:** Enjoy a clean and responsive user interface for seamless navigation and interaction.
 
 ## Technologies Used
 
